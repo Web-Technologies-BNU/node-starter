@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const OpenAI = require('openai');
@@ -16,6 +17,7 @@ const openai = new OpenAI({
 app.use(cors());
 app.use(express.json());        // parse JSON bodies
 app.use(morgan('dev'));         // request logs
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Health check
 app.get('/health', (req, res) => {
